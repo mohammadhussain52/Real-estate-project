@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+* {
+    font-family: Outfit;
+}
+
+.sticky-soon {
+    transform: translateY(-100%);
+    /* Initially move it up */
+}
+
+.sticky-active {
+
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    position: -webkit-sticky;
+    position: sticky !important;
+    top: 0;
+    background-color: var(--dark);
+    transform: translateY(-1);
+    /* Slide it down */
+    z-index: 1020;
+}
