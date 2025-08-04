@@ -54,7 +54,7 @@ const Projects = () => {
     e.preventDefault();
     const currentX = e.pageX || e.touches[0].pageX;
     const offset = currentX - startX;
-    setDragOffset(offset); // Drag ke dauraan slider ko live move karne ke liye offset set karein
+    setDragOffset(offset);
   };
 
   const handleDragEnd = () => {
@@ -66,11 +66,10 @@ const Projects = () => {
       sliderRef.current.style.userSelect = "auto";
     }
 
-    // Snap Logic: Decide karein ke slide change karni hai ya wapas apni jagah bhejna hai
     const cardWidth = sliderRef.current
       ? sliderRef.current.offsetWidth / cardsToShow
       : 0;
-    const swipeThreshold = cardWidth / 4; // Agar card ki 25% width se zyada drag ho to slide change karein
+    const swipeThreshold = cardWidth / 4;
 
     if (dragOffset < -swipeThreshold) {
       nextproject();
@@ -78,7 +77,6 @@ const Projects = () => {
       prevproject();
     }
 
-    // Drag offset ko reset karein taake slider apni final position par smoothly settle ho jaye
     setDragOffset(0);
   };
 
@@ -125,22 +123,20 @@ const Projects = () => {
       <div className="overflow-hidden">
         <div
           ref={sliderRef}
-          // Jab drag kar rahe hon to transition class hata dein taake movement instant ho
           className={`flex gap-8 ${
             !isDragging ? "transition-transform duration-300 ease-out" : ""
           }`}
           style={{
-            // 'currentIndex' se base position set karein aur 'dragOffset' se live movement add karein
             transform: `translateX(calc(-${
               (currentIndex * 100) / projectsData.length
             }% + ${dragOffset}px))`,
-            width: `${(projectsData.length / cardsToShow) * 100}%`, // Ensure the container is wide enough
+            width: `${(projectsData.length / cardsToShow) * 100}%`,
             cursor: "grab",
           }}
           onMouseDown={handleDragStart}
-          onMouseMove={handleDragMove} // Is handler ko add karna zaroori hai
+          onMouseMove={handleDragMove}
           onMouseUp={handleDragEnd}
-          onMouseLeave={handleDragEnd} // Agar mouse bahar jaye to drag cancel ho jaye
+          onMouseLeave={handleDragEnd}
           onTouchStart={handleDragStart}
           onTouchMove={handleDragMove}
           onTouchEnd={handleDragEnd}
