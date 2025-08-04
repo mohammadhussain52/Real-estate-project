@@ -7,6 +7,7 @@ import Contact from "./Components/Contact";
 import { ToastContainer } from "react-toastify";
 import Footer from "./Components/Footer";
 import { FaArrowUp } from "react-icons/fa";
+import Banner from "./Components/Banner";
 
 const App = () => {
   const [showBtn, setShowBtn] = useState("myBtn none");
@@ -36,6 +37,7 @@ const App = () => {
     <div className="w-full overflow-hidden">
       <ToastContainer />
       <Header />
+      <Banner />
       <About />
       <Projects />
       <Testimonials />

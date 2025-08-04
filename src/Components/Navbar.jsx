@@ -4,18 +4,26 @@ import { assets } from "../assets/assets";
 const Navbar = () => {
   const [showMobileMenu, setshowMobileMenu] = useState(false);
   useEffect(() => {
-    // if (setshowMobileMenu) {
-    //   document.body.style.overflow = "hidden";
-    // } else {
-    //   document.body.style.overflow = "auto";
-    // }
-    return () => {
-      document.body.style.overflow = "visible";
+    const handleScroll = () => {
+      const headers = document.querySelector("#main-nav");
+
+      if (window.scrollY > 100) {
+        headers?.classList.add("sticky-active");
+        headers?.classList.remove("sticky-soon");
+      } else if (window.scrollY > 10) {
+        headers?.classList.add("sticky-soon");
+        headers?.classList.remove("sticky-active");
+      } else {
+        headers?.classList.remove("sticky-active");
+        headers?.classList.remove("sticky-soon");
+      }
     };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [setshowMobileMenu]);
 
   return (
-    <div className="absolute top-0 left-0 w-full z-10">
+    <div className="fixed top-0 left-0 w-full z-10" id="main-nav">
       <div className="container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32 bg-transparent">
         <img src={assets.logo} alt="" />
         <ul className="hidden md:flex gap-7 text-white">
@@ -58,6 +66,7 @@ const Navbar = () => {
           alt=""
         />
       </div>
+
       {/* -------Mobile-menu------ */}
       <div
         className={`md:hidden ${

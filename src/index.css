@@ -33,3 +33,20 @@
 .myBtn:hover {
     background-color: #555;
 }
+
+/* Sticky Header */
+
+.sticky-soon {
+    transform: translateY(-100%);
+    /* Initially move it up */
+}
+
+.sticky-active {
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    position: -webkit-sticky;
+    position: fixed !important;
+    top: 0;
+    transform: translateY(-1);
+    background: #101828;
+    z-index: 1020;
+}
